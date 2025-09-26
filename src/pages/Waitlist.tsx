@@ -32,13 +32,12 @@ export default function Waitlist() {
           >
             Get ahead of the crowd, explore<br/>
             Suilens first and enjoy early access<br/>
-            and exclusive perks.
           </p>
         </div>
 
         {/* Input + CTA pill: fixed desktop size, responsive downwards */}
         <form onSubmit={handleSubmit} className="w-full flex items-center justify-center">
-          <div className="relative flex w-full max-w-[445px] h-[82px] rounded-[100px] border border-[#D0D5DD] bg-white items-center">
+          <div className="relative flex w-full max-w-[445px] h-[60px] rounded-[100px] border border-[#D0D5DD] bg-white items-center">
             <input
               type="email"
               required
@@ -51,7 +50,7 @@ export default function Waitlist() {
             {/* CTA button: 140x74, radius 100, brand bg #101928, positioned visually at right */}
             <button
               type="submit"
-              className="shrink-0 w-[112px] h-[59px] rounded-[100px] text-white text-[14px] font-semibold mr-[10px]"
+              className="shrink-0 w-[100px] h-[40px] rounded-[100px] text-white text-[14px] font-semibold mr-[10px]"
               style={{ backgroundColor: '#101928' }}
             >
               Join Waitlist
