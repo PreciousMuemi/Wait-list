@@ -2,10 +2,8 @@ export default function Success() {
   return (
     <section className="text-center pt-8 sm:pt-10">
       <div className="tick-wrap mb-4">
-        <svg width="54" height="54" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle className="tick-circle" cx="24" cy="24" r="22" fill="currentColor" style={{ color: 'rgba(34,197,94,0.12)' }} />
-          <path className="tick-path" d="M16 24.5L22 30.5L32 18.5" stroke="#16A34A" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        {/* Per latest instruction: use header.png as the success tick icon */}
+        <img src="/Images/header.png" alt="Success" className="h-14 w-14 object-contain tick-pop-in" />
       </div>
 
       {/* Headline block: exact 725x172 container on desktop */}

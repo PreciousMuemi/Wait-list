@@ -5,8 +5,8 @@ export default function App() {
   return (
     <div className="min-h-dvh flex flex-col bg-white">
       {/* Top logo bar */}
-      <header className="py-6">
-        <div className="max-w-5xl mx-auto flex justify-center">
+      <header className="w-full border-b border-[#E5E7EB] py-5 px-4 sm:px-8 lg:px-[648px]">
+        <div className="w-full mx-auto flex justify-center items-center gap-2" style={{ gap: '8px' }}>
           <Logo />
         </div>
       </header>
