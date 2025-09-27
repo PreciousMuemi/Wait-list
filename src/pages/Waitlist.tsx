@@ -5,9 +5,32 @@ export default function Waitlist() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
 
-  function handleSubmit(e: React.FormEvent) {
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    navigate('/success', { replace: true })
+    setLoading(true)
+    setError(null)
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || ''
+      const res = await fetch(`${apiUrl}/api/waitlist`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      })
+      if (res.status === 201 || res.status === 409) {
+        navigate('/success', { replace: true })
+      } else {
+        const data = await res.json()
+        setError(data.message || 'Failed to join waitlist')
+      }
+    } catch (err) {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -36,7 +59,7 @@ export default function Waitlist() {
         </div>
 
         {/* Input + CTA pill: fixed desktop size, responsive downwards */}
-        <form onSubmit={handleSubmit} className="w-full flex items-center justify-center">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center justify-center gap-2">
           <div className="relative flex w-full max-w-[445px] h-[60px] rounded-[100px] border border-[#D0D5DD] bg-white items-center">
             <input
               type="email"
@@ -46,16 +69,18 @@ export default function Waitlist() {
               placeholder="Your email"
               className="flex-1 bg-transparent px-4 sm:px-5 text-center sm:text-left text-[14px] leading-[120%] font-normal outline-none placeholder:text-[#667185]"
               style={{ fontFamily: 'Inter, ui-sans-serif, system-ui' }}
+              disabled={loading}
             />
-            {/* CTA button: 140x74, radius 100, brand bg #101928, positioned visually at right */}
             <button
               type="submit"
               className="shrink-0 w-[100px] h-[40px] rounded-[100px] text-white text-[14px] font-semibold mr-[10px]"
               style={{ backgroundColor: '#101928' }}
+              disabled={loading}
             >
-              Join Waitlist
+              {loading ? 'Joining...' : 'Join Waitlist'}
             </button>
           </div>
+          {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
         </form>
       </div>
     </section>
